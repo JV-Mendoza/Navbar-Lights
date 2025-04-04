@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trafficlight</title>
+    <link rel="stylesheet" href="trafficlight.css">
+</head>
+<body>
+    <div class="traffic-light">
+        <div class="light red" id="red"></div>
+        <div class="light yellow" id="yellow"></div>
+        <div class="light green" id="green"></div>
+    <script>
+        const redLight = document.getElementById('red');
+        const yellowLight = document.getElementById('yellow');
+        const greenLight = document.getElementById('green');
+        function allLightsOff() {
+            redLight.classList.remove('active');
+            yellowLight.classList.remove('active');
+            greenLight.classList.remove('active');
+        }
+        function getRandomTime() {
+            return Math.floor(Math.random() * 3000) + 6000;
+        }
+        function trafficLightSequence() {
+            allLightsOff();
+            redLight.classList.add('active');
+            setTimeout(() => {
+                allLightsOff();
+                greenLight.classList.add('active');
+                setTimeout(() => {
+                    allLightsOff();
+                    yellowLight.classList.add('active');
+                    setTimeout(trafficLightSequence, getRandomTime());
+                }, getRandomTime());
+            }, getRandomTime());
+        }
+        trafficLightSequence();
+    </script>
+</body>
+</html>
